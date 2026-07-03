@@ -1,0 +1,148 @@
+# TODO — MEGA CEL Admin Frontend
+
+## 2026-06-14 — Arquitectura Limpia: Capa de Dominio
+
+- [x] Crear estructura `src/domain/` (núcleo sin dependencias de React/Firebase)
+- [x] Definir 10 entidades unificadas del negocio
+- [x] Definir 12 value objects con reglas de validación
+- [x] Definir 9 interfaces de repositorio (ports)
+- [x] Definir 4 servicios de dominio puros
+- [x] Definir errores de dominio tipados
+
+## 2026-06-14 — Arquitectura Limpia: Capa Application
+
+- [x] Crear estructura `src/application/` (casos de uso + DTOs)
+- [x] Definir `UseCase<Input, Output>` y errores de aplicación
+- [x] Crear DTOs por módulo (auth, sales, orders, products, admins, catalog, history)
+- [x] Implementar 22 casos de uso con fábricas `create*UseCase(deps)`
+- [x] Crear `createApplication(deps)` — composition root de application
+
+## 2026-06-14 — Arquitectura Limpia: Capa Infrastructure + App
+
+- [x] Crear `src/infrastructure/` con 9 repositorios Firebase
+- [x] Migrar helpers Firestore, History, Seed, Storage
+- [x] Crear `getInfrastructure()` singleton + `createInfrastructure()`
+- [x] Crear `DependencyProvider` + hooks `useApplication()` / `useInfrastructure()`
+- [x] Crear `initializeApp()` bootstrap
+- [x] Compatibilidad: `src/firebase/*` y `historyService` re-exportan infrastructure
+## 2026-06-14 — Reorganización estricta por capas
+
+- [x] Mover `pages/`, `components/`, `context/` → `presentation/`
+- [x] Mover `App.tsx`, `main.tsx`, estilos → `presentation/app/` y `presentation/styles/`
+- [x] Mover providers y bootstrap → `presentation/providers/`, `presentation/bootstrap/`
+- [x] Mover seed constants → `infrastructure/firebase/seed/constants/`
+- [x] Mover storage, history, admin adapters → `infrastructure/compatibility/` y `infrastructure/firebase/storage/`
+- [x] Eliminar carpetas sueltas: `src/firebase/`, `src/utils/`, `src/types/`, `src/constants/`, `src/app/`
+- [x] Mover `src/assets/` → `presentation/assets/`
+- [x] Migrar `Products.tsx` a arquitectura limpia (useApplication + repositories)
+- [x] Fix TS en `Products.tsx` (`err?.code` en catch) — `npm run build` OK
+- [x] Migrar `Categories.tsx` a arquitectura limpia (useApplication + repositories)
+- [x] Migrar `Brands.tsx` a arquitectura limpia (useApplication + repositories)
+- [x] Migrar `Users.tsx` a arquitectura limpia (platformUsers use cases)
+- [x] Migrar `Dashboard.tsx`, `History.tsx`, `Reports.tsx` (repositories + domain)
+- [x] Extender dominio `Admin` (profile + preferences) + repos `subscribe/update`
+- [x] Casos de uso `admins.updateProfile` y `admins.updatePreferences`
+- [x] Migrar `Settings.tsx`, `AdminManagementSection`, `Navbar.tsx`
+- [x] Login ya usa `useAuth` → `application.auth.*` (AuthProvider)
+- [x] Fix historial Firestore: omitir `undefined` en `changes`/campos opcionales (`stripUndefined`)
+- [x] Eliminar imagen de marca en Firebase Storage al borrar permanentemente (`deleteBrandStorageAssets`)
+- [x] Crear marca con UI optimista — lista instantánea, guardado en segundo plano
+- [x] Rediseño UI página Marcas — componentes modulares, hero mesh, búsqueda `useDeferredValue`, KPI strip, command bar sticky, cards animadas, modales glass (2026-06-14)
+- [x] Marcas: quitar "Ver" e "Inactivas", clic en card/fila abre edición, sort pills, Ctrl+K búsqueda, Escape limpia (2026-06-14)
+- [x] Rediseño UI página Categorías — misma arquitectura que Marcas, UI optimista, Storage delete, interacción completa (2026-06-14)
+- [x] Categorías: paleta teal/cian armónica (distinta a Marcas) + edición optimista instantánea (2026-06-14)
+- [x] Rediseño UI página Productos — paleta rosa/fucsia, componentes modulares, KPI strip, command bar, grid/tabla, crear/editar optimista, solo activos (2026-06-14)
+- [x] Productos: imágenes por subida + URL externa (pegar/agregar) y fix color inputs del formulario (2026-06-14)
+- [x] Productos: editor rich text en descripción completa (negritas, viñetas, tipografía) + fix fondo negro inputs/números (2026-06-14)
+- [x] Productos: variantes por color en un solo formulario (stock + imágenes por color, creación masiva) (2026-06-14)
+- [x] Productos: variantes por color también en edición (carga hermanos, crear/actualizar/eliminar) (2026-06-14)
+- [x] Productos: precio, costo y descuento independientes por variante de color (2026-06-14)
+- [x] Roles Administrador + Usuario (Cliente): interfaz tienda `/tienda`, auth Firebase, cuenta, mis pedidos (2026-06-14)
+- [x] Login único con redirección por rol; tienda en `/` como inicio; admin en `/admin` (2026-06-14)
+- [x] Optimizar velocidad de login: consultas Firestore en paralelo, sync cliente en segundo plano, evitar doble resolución de sesión (2026-06-14)
+- [x] Rediseño encabezado tienda usuario: barra promo, mesh glass, nav pills, búsqueda, menú móvil (2026-06-14)
+- [x] Encabezado tienda con logo2.png y paleta oficial MEGA CEL (azul, rosa, verde, naranja, amarillo, negro) (2026-06-14)
+- [x] Rediseño encabezado e-commerce: fondo azul, logo3.png blanco, buscador central, nav limpia (2026-06-14)
+- [x] Carrito de compras interactivo + checkout online + entrega Puerto Maldonado (2026-06-14)
+- [x] Quitar barra promo del encabezado tienda (2026-06-14)
+- [x] Rediseño encabezado responsive: gradiente vivo, scroll suave, lupa+carrito+menú a la derecha (2026-06-14)
+- [x] Botón buscar icono circular + categorías en menú hamburguesa (2026-06-14)
+- [x] Categorías menú hamburguesa: solo nombres en una columna (2026-06-14)
+- [x] Encabezado: sin Inicio/Catálogo, categorías bajo buscador, icono login, menú izquierda (2026-06-14)
+- [x] Fix buscador duplicado al cambiar móvil↔escritorio + hooks presentation (useStoreCategories, useStoreHeaderViewport) (2026-06-14)
+- [x] Encabezado pulido: azul oscuro plano, buscador largo, typing placeholder, categorías texto, sin shrink scroll (2026-06-14)
+- [x] Categorías header: sin separador "·", más espaciado (gap 1.75rem), fade-in escalonado + subrayado hover/activo (2026-06-14)
+- [x] Categorías header v2: gap 2.4rem, glow cyan al hover, subrayado degradado, halo suave y mismo efecto en drawer móvil (2026-06-14)
+- [x] Categorías header v3: sin contrastes — solo tonos blancos suaves, subrayado tenue, sin glow ni colores extra (2026-06-14)
+- [x] Inicio tienda: banner slider1.png a ancho completo en hero, CTAs y tarjetas debajo (2026-06-14)
+- [x] Inicio tienda: banner slider2.png completo sin recorte (2026-06-14)
+- [x] Banner inicio: fade-in, zoom suave Ken Burns, brillo deslizante y viñeta top hacia header (2026-06-14)
+- [x] Inicio tienda: carrusel de marcas activas bajo banner + filtro `?marca=` en catálogo (2026-06-14)
+- [x] Carrusel marcas v2: fondo oscuro MEGA CEL, título/subtítulo centrados, solo logo tipográfico blanco + flechas (2026-06-14)
+- [x] Carrusel marcas v3: fondo negro, logos PNG en assets/logos, scroll automático, título grande sin subtítulo (2026-06-14)
+- [x] Banner inicio: limpiado zoom/brillo/viñeta, imagen completa estática y transición suave a sección negra (2026-06-14)
+- [x] Inicio tienda: sección premium cuadrícula — categorías polaroid, productos destacados, stats y dual CTA (2026-06-14)
+- [x] Inicio tienda v2: secciones separadas Recién llegados + Más vendidos, paleta MEGA CEL, cards premium con carrito (2026-06-14)
+- [x] Showcase: fondo cuadrícula premium restaurado, máx. 5 productos por sección, grid 5 columnas (2026-06-14)
+- [x] Marcas: degradado inferior hacia showcase + Recién llegados layout bento hero (2026-06-14)
+- [x] Detalle producto: tipografía y espaciado más grandes (2026-06-14)
+- [x] Método de pago Yape: badge en detalle producto y carrito/checkout (2026-06-14)
+- [x] Detalle producto: sección iconos con texto (envío, retiro, calidad, atención) (2026-06-14)
+- [x] Detalle producto: sección Valoraciones con reseñas generales (placeholder) (2026-06-14)
+- [x] Valoraciones: tarjetas con imagen del producto, nombre, estrellas y comentario (2026-06-14)
+- [x] Valoraciones: fecha de publicación visible en cada tarjeta (2026-06-14)
+- [x] Valoraciones reales: dominio, Firebase `product_reviews`, hook y caso de uso crear (2026-06-14)
+- [x] Detalle producto: sección "Te podría interesar" por misma categoría con carrusel (2026-06-14)
+- [x] Recomendaciones: tarjetas más grandes y flechas solo si hay más de 5 (2026-06-14)
+- [x] Carrito checkout: referencia, QR Yape y WhatsApp post-confirmación (2026-06-14)
+- [x] Carrito checkout: flujo 3 pasos — Confirmar datos → Pago/WhatsApp → Realizar pedido (2026-06-14)
+- [x] Mis pedidos: fechas en zona horaria Perú (America/Lima) al guardar y mostrar (2026-06-14)
+- [x] Checkout entrega: celular solo 9 dígitos numéricos (Perú) (2026-06-14)
+- [x] Admin pedidos: estados pago (pendiente, verificando, exitoso, rechazado) + motivo visible al cliente (2026-06-14)
+- [x] Inventario pedidos: soldCount solo en pago exitoso; rechazo restaura stock y revierte venta (2026-06-14)
+- [x] Inventario pedidos: stock solo se descuenta en pago exitoso y se revierte al salir de ese estado (2026-06-14)
+- [x] Mis pedidos rechazados: botón WhatsApp al admin con motivo y resumen (2026-06-14)
+- [x] Número de pedido: 6 dígitos aleatorios únicos (ej. 482910) (2026-06-14)
+- [x] Tienda inicio: quitar mensaje de bienvenida con código de cliente al loguearse (2026-06-14)
+- [x] Mi cuenta: badge Cuenta verificada, rol Cliente, sin texto descriptivo extra (2026-06-14)
+- [x] Mis pedidos: UI simplificada sin stats ni textos redundantes (2026-06-14)
+- [x] Checkout entrega: quitar campo Notas adicionales (2026-06-14)
+- [x] Marcas: degradado negro arriba y abajo (igual banner), transición negra al showcase (2026-06-14)
+- [x] Showcase: línea rosa más a la derecha, semitransparente y bajo el contraste negro (2026-06-14)
+- [x] Valoraciones: formulario para que el cliente publique reseña (estrellas + comentario) (2026-07-02)
+- [x] Valoraciones: hook filtra por `productId` y detecta compra verificada (pago exitoso) (2026-07-02)
+- [x] Valoraciones: subir hasta 5 fotos por reseña (Firebase Storage) (2026-07-02)
+- [x] Mis pedidos: botón Valorar producto solo en pago exitoso → detalle #valoraciones (2026-07-02)
+- [x] Valoraciones: solo lectura en detalle producto; calificar desde Mis pedidos con modal (2026-07-02)
+- [x] Mis pedidos: botones alineados a paleta azul/verde suave de la tienda (2026-07-02)
+- [x] Admin Dashboard: diseño renovado, pedidos/stock bajo del día (Perú), móvil mejorado (2026-07-02)
+- [x] Admin Sidebar: logo MEGA CEL, paleta azul/rosa y menú con iconos (2026-07-02)
+- [x] Admin Sidebar: fondo oscuro en logo para letras blancas visibles (2026-07-02)
+- [x] Admin Usuarios: hub con tarjetas Gestión administradores / Gestión clientes (2026-07-02)
+- [x] Admin Clientes: diseño plano sin degradados, paleta MEGA CEL (2026-07-02)
+- [x] Admin Clientes: iconos SVG editar/eliminar y estado con punto (sin emojis) (2026-07-02)
+- [x] Admin Clientes: campo contraseña al crear + cuenta Firebase Auth vinculada (2026-07-02)
+- [x] Admin Usuarios: UI optimista crear/editar/eliminar clientes y administradores (2026-07-02)
+- [x] Admin Pedidos: rediseño modular estilo Productos, paleta índigo/violeta (2026-07-02)
+- [x] Admin Usuarios: rediseño hub/clientes/admin estilo Pedidos, paleta teal (2026-07-02)
+- [x] Admin Clientes: botones editar/eliminar con iconos SVG, colores teal/rojo y hover (2026-07-02)
+- [x] Admin Ventas: rediseño modular estilo Pedidos, paleta esmeralda/ámbar (2026-07-02)
+- [x] Admin Ventas: página removida del menú y rutas (no se usará por ahora) (2026-07-02)
+- [x] Admin Historial: rediseño modular timeline, paleta slate/cielo, búsqueda y KPIs (2026-07-02)
+- [x] Admin Historial: pestañas Lun–Dom (7 días) con fechas de la semana actual hora Perú (2026-07-02)
+- [x] Admin Historial: categorías Administrador / Cliente / Inicios de sesión con contadores (2026-07-02)
+- [x] Admin Historial: `actorType` en dominio + logging admin/cliente/login en casos de uso (2026-07-02)
+- [x] Admin Historial: registro de intentos fallidos de login (credenciales, acceso denegado, Google cancelado) (2026-07-02)
+- [x] Admin Historial: responsive móvil — KPIs en 2 columnas y días semana con scroll horizontal (2026-07-02)
+- [x] Admin Reportes: rediseño modular estilo Pedidos/Historial, paleta esmeralda/violeta (2026-07-02)
+- [x] Admin Reportes: gráfico semanal Lun–Dom con cantidades vendidas (eje Y) sin filtros de periodo (2026-07-02)
+- [x] Admin Reportes: eje Y entero con máximo real del periodo + escala relativa en Productos/Usuarios/Categorías (2026-07-02)
+- [x] Admin Reportes: gráfico semanal convertido a histograma Lun–Dom (2026-07-02)
+- [x] Admin Configuración: rediseño modular paleta rosa/slate, hero mesh, perfil + preferencias (2026-07-02)
+- [x] Admin Configuración: eliminada sección "Gestión de Administradores" (vive en Usuarios) (2026-07-02)
+- [x] Registro login/tienda: quitado campo "Teléfono (opcional)" del formulario (2026-07-02)
+- [x] Preparación Vercel: `vercel.json`, `.env.local.example`, README despliegue, fix link registro (2026-07-02)
+
+## FIXME
+
+- FIXME: ESLint reporta warnings/errores en infra y páginas admin (no bloquea `npm run build`)

@@ -1,0 +1,16 @@
+.store-star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12rem;
+  color: #f1a711;
+}
+
+.store-star-rating--sm svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.store-star-rating--md svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}

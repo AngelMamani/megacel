@@ -1,0 +1,110 @@
+.store-account {
+  padding: 2rem 0 2.5rem;
+}
+
+.store-account__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1rem;
+}
+
+.store-account__summary,
+.store-account__form {
+  background: #fff;
+  border: 1px solid var(--sp-border);
+  border-radius: var(--sp-radius);
+  box-shadow: var(--sp-shadow);
+  padding: 1.25rem;
+}
+
+.store-account__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.7rem 0.35rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid #bbf7d0;
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.store-account__badge-icon {
+  display: inline-flex;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+}
+
+.store-account__badge-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.store-account__badge-icon circle {
+  fill: #16a34a;
+  stroke: #15803d;
+  stroke-width: 0.5;
+}
+
+.store-account__badge-icon path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.store-account__summary h1 {
+  margin: 0 0 0.35rem;
+}
+
+.store-account__meta {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.store-account__meta div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.store-account__meta span {
+  font-size: 0.78rem;
+  color: var(--sp-text-muted);
+  font-weight: 600;
+}
+
+.store-account__form h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.store-account__field {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.store-account__field span {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.store-account__field input {
+  border: 1px solid var(--sp-border);
+  border-radius: 0.7rem;
+  padding: 0.72rem 0.85rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .store-account__grid {
+    grid-template-columns: 1fr;
+  }
+}

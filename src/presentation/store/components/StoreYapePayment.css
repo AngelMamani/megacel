@@ -1,0 +1,92 @@
+.store-yape-payment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.store-yape-payment__label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: 0.01em;
+}
+
+.store-yape-payment__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.55rem;
+  background: #f8fafc;
+}
+
+.store-yape-payment__logo {
+  display: block;
+  width: 38px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.store-yape-payment__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #571a7c;
+}
+
+.store-yape-payment__hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.store-yape-payment__qr-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem;
+  border: 1px dashed #d8b4fe;
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, #fdf4ff 0%, #faf5ff 100%);
+}
+
+.store-yape-payment__qr {
+  display: block;
+  width: min(11.5rem, 100%);
+  height: auto;
+  border-radius: 0.55rem;
+  border: 1px solid #e9d5ff;
+  background: #fff;
+}
+
+.store-yape-payment__qr-caption {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6b21a8;
+  text-align: center;
+}
+
+.store-yape-payment--card {
+  margin-top: 0.35rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #e8edf3;
+  border-radius: 0.65rem;
+  background: #fafbfd;
+}
+
+.store-yape-payment--card .store-yape-payment__badge {
+  border-color: #e8edf3;
+  background: #fff;
+}
+
+.store-yape-payment--inline {
+  gap: 0.45rem;
+}
+
+.store-yape-payment--inline .store-yape-payment__hint {
+  font-size: 0.75rem;
+}

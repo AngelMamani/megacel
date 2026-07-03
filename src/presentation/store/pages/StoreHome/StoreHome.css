@@ -1,0 +1,50 @@
+.store-home__slider {
+  display: block;
+  width: 100%;
+  line-height: 0;
+  background: #ebe7e1;
+  text-decoration: none;
+  position: relative;
+  animation: store-home-banner-in 0.6s ease both;
+}
+
+.store-home__slider::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.5rem;
+  background: linear-gradient(180deg, transparent, #000);
+  pointer-events: none;
+}
+
+.store-home__slider-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  vertical-align: top;
+}
+
+@keyframes store-home-banner-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .store-home__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .store-home__slider {
+    animation: none;
+  }
+}

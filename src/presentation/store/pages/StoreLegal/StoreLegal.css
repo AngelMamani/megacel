@@ -1,0 +1,31 @@
+.store-legal {
+  padding: 2.5rem 0 3rem;
+}
+
+.store-legal__inner {
+  max-width: 42rem;
+}
+
+.store-legal__inner h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--sp-text);
+}
+
+.store-legal__inner p {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--sp-text-muted);
+}
+
+.store-legal__back {
+  display: inline-flex;
+  margin-bottom: 1.25rem;
+  color: var(--sp-primary) !important;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.store-legal__back:hover {
+  text-decoration: underline !important;
+}

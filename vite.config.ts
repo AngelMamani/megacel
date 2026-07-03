@@ -6,16 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     headers: {
-      // Firebase Auth (signInWithPopup): Chrome puede advertir si COOP bloquea window.closed en popups cross-origin.
-      // `restrict-properties` suele ser el modo más compatible para mantener seguridad sin romper popups.
-      'Cross-Origin-Opener-Policy': 'restrict-properties',
-      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+      // Permite popups de Google/Firebase sin warnings de window.closed (signInWithPopup).
+      'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
     },
   },
   preview: {
     headers: {
-      'Cross-Origin-Opener-Policy': 'restrict-properties',
-      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+      'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
     },
   },
 })
