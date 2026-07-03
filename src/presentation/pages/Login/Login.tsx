@@ -32,8 +32,10 @@ export const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.documentElement.classList.add('login-page-open');
     document.body.classList.add('login-page-open');
     return () => {
+      document.documentElement.classList.remove('login-page-open');
       document.body.classList.remove('login-page-open');
     };
   }, []);

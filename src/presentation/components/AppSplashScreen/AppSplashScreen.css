@@ -1,0 +1,171 @@
+.app-splash {
+  --splash-bg: #0a2540;
+  --splash-bg-deep: #061525;
+  --splash-accent: #1976d2;
+  --splash-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, var(--splash-bg-deep) 0%, var(--splash-bg) 42%, #0d3a6b 100%);
+  overflow: hidden;
+  pointer-events: all;
+  animation: app-splash-in 0.45s var(--splash-ease);
+}
+
+body.app-splash-open {
+  overflow: hidden;
+}
+
+.app-splash__mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.app-splash__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.45;
+}
+
+.app-splash__blob--1 {
+  width: 280px;
+  height: 280px;
+  background: #1976d2;
+  top: -80px;
+  right: 10%;
+}
+
+.app-splash__blob--2 {
+  width: 200px;
+  height: 200px;
+  background: #ec4899;
+  bottom: -60px;
+  left: 12%;
+}
+
+.app-splash__blob--3 {
+  width: 140px;
+  height: 140px;
+  background: #22d3ee;
+  top: 42%;
+  left: 58%;
+}
+
+.app-splash__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.app-splash__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem 1.75rem;
+  border-radius: 1.1rem;
+  background: linear-gradient(145deg, #1976d2 0%, #0a3d7a 100%);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.app-splash__logo {
+  width: min(10rem, 42vw);
+  height: auto;
+  display: block;
+  mix-blend-mode: screen;
+}
+
+.app-splash__tagline {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.app-splash--enter .app-splash__content {
+  animation: app-splash-logo-in 0.85s var(--splash-ease) both;
+}
+
+.app-splash--enter .app-splash__tagline {
+  animation: app-splash-tagline-in 0.85s var(--splash-ease) 0.18s both;
+}
+
+.app-splash--exit {
+  animation: app-splash-out 0.65s var(--splash-ease) forwards;
+}
+
+.app-splash--exit .app-splash__content {
+  animation: app-splash-logo-out 0.65s var(--splash-ease) forwards;
+}
+
+@keyframes app-splash-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes app-splash-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes app-splash-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82) translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes app-splash-logo-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.08) translateY(-12px);
+  }
+}
+
+@keyframes app-splash-tagline-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-splash,
+  .app-splash--enter .app-splash__content,
+  .app-splash--enter .app-splash__tagline,
+  .app-splash--exit,
+  .app-splash--exit .app-splash__content {
+    animation-duration: 0.15s !important;
+  }
+}

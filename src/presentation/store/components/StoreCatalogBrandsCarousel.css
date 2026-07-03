@@ -14,11 +14,13 @@
 .store-catalog-brands__track {
   display: flex;
   width: max-content;
-  animation: store-catalog-brands-scroll 34s linear infinite;
+  animation: store-catalog-brands-scroll 58s linear infinite;
 }
 
-.store-catalog-brands__track:hover {
-  animation-play-state: paused;
+@media (min-width: 769px) {
+  .store-catalog-brands__track:hover {
+    animation-play-state: paused;
+  }
 }
 
 .store-catalog-brands__group {
@@ -114,6 +116,29 @@
     margin-bottom: 1.35rem;
   }
 
+  .store-catalog-brands__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scrollbar-width: none;
+  }
+
+  .store-catalog-brands__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .store-catalog-brands__track {
+    animation: none;
+    width: max-content;
+  }
+
+  .store-catalog-brands__brand:hover {
+    transform: none;
+  }
+
   .store-catalog-brands__circle {
     width: 5.5rem;
     height: 5.5rem;
@@ -127,7 +152,7 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (min-width: 769px) {
   .store-catalog-brands__track {
     animation: none;
   }

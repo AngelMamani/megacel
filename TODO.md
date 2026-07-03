@@ -143,6 +143,10 @@
 - [x] Registro login/tienda: quitado campo "Teléfono (opcional)" del formulario (2026-07-02)
 - [x] Preparación Vercel: `vercel.json`, `.env.local.example`, README despliegue, fix link registro (2026-07-02)
 - [x] GitHub: proyecto subido a `https://github.com/AngelMamani/megacel.git` (rama `main`) (2026-07-02)
+- [x] Login/registro: fix scroll overscroll — fondo oscuro fijo, sin blanco al bajar (2026-07-02)
+- [x] Splash intro tienda: transición con logo MEGA CEL al abrir la página (1 vez por sesión) (2026-07-02)
+- [x] Catálogo: carrusel marcas móvil — auto-scroll + deslizable con dedo (pausa al tocar) (2026-07-02)
+- [x] Catálogo: velocidad carrusel marcas reducida (móvil + escritorio) (2026-07-02)
 
 ## FIXME
 

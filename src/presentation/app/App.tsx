@@ -1,6 +1,11 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Layout } from '../components/Layout/Layout.tsx';
+import {
+  AppSplashScreen,
+  ShouldShowAppSplash,
+} from '../components/AppSplashScreen/AppSplashScreen.tsx';
 import { Dashboard } from '../pages/Dashboard/Dashboard.tsx';
 import { Products } from '../pages/Products/Products.tsx';
 import { Users } from '../pages/Users/Users.tsx';
@@ -23,7 +28,6 @@ import { StoreRegister } from '../store/pages/StoreRegister/StoreRegister.tsx';
 import { StoreAccount } from '../store/pages/StoreAccount/StoreAccount.tsx';
 import { StoreOrders } from '../store/pages/StoreOrders/StoreOrders.tsx';
 import { StoreLegal } from '../store/pages/StoreLegal/StoreLegal.tsx';
-import { useEffect } from 'react';
 import { initializeApp } from '../bootstrap/initializeApp.ts';
 import '../styles/App.css';
 
@@ -79,6 +83,8 @@ const toasterOptions = {
 };
 
 function App() {
+  const [ShowSplash, setShowSplash] = useState(ShouldShowAppSplash);
+
   useEffect(() => {
     initializeApp().catch((error) => {
       console.error('Error initializing app:', error);
@@ -88,6 +94,7 @@ function App() {
   return (
     <DependencyProvider>
       <AuthProvider>
+        {ShowSplash && <AppSplashScreen OnComplete={() => setShowSplash(false)} />}
         <BrowserRouter>
           <Toaster position="top-right" toastOptions={toasterOptions} />
           <Routes>

@@ -1,5 +1,10 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStoreBrands } from '../hooks/useStoreBrands.ts';
+import {
+  IsStoreCatalogBrandsMobileViewport,
+  useStoreCatalogBrandsMobileAutoplay,
+} from '../hooks/useStoreCatalogBrandsAutoplay.ts';
 import {
   ResolveStoreBrandCatalogId,
   StoreBrandLogoItems,
@@ -11,6 +16,8 @@ interface StoreCatalogBrandsCarouselProps {
   ActiveBrandId?: string;
   CategoryId?: string;
 }
+
+const MOBILE_MQ = '(max-width: 768px)';
 
 const BuildBrandHref = (brandId: string, categoryId?: string) => {
   const params = new URLSearchParams();
@@ -37,9 +44,10 @@ const RenderLogoSlides = (
           className={`store-catalog-brands__brand${isActive ? ' is-active' : ''}`}
           aria-label={`Ver productos de ${item.name}`}
           aria-current={isActive ? 'true' : undefined}
+          draggable={false}
         >
           <span className="store-catalog-brands__circle">
-            <img src={item.logo} alt={item.name} className="store-catalog-brands__logo" loading="lazy" />
+            <img src={item.logo} alt={item.name} className="store-catalog-brands__logo" loading="lazy" draggable={false} />
           </span>
         </Link>
       </li>
@@ -50,13 +58,29 @@ export const StoreCatalogBrandsCarousel = ({
   ActiveBrandId,
   CategoryId,
 }: StoreCatalogBrandsCarouselProps) => {
+  const ViewportRef = useRef<HTMLDivElement>(null);
+  const [IsMobile, setIsMobile] = useState(IsStoreCatalogBrandsMobileViewport);
   const { brands, isLoading } = useStoreBrands();
   const catalogBrands = brands.map((brand) => ({ id: brand.id, name: brand.name }));
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MQ);
+    const OnChange = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener('change', OnChange);
+    return () => mediaQuery.removeEventListener('change', OnChange);
+  }, []);
+
+  useStoreCatalogBrandsMobileAutoplay(ViewportRef, IsMobile && !isLoading);
 
   if (!isLoading && catalogBrands.length === 0 && StoreBrandLogoItems.length === 0) return null;
 
   return (
-    <section className="store-catalog-brands" aria-label="Marcas disponibles">
+    <section
+      className={`store-catalog-brands${IsMobile ? ' store-catalog-brands--mobile' : ''}`}
+      aria-label="Marcas disponibles"
+    >
       {isLoading ? (
         <div className="store-catalog-brands__skeleton" aria-hidden>
           {Array.from({ length: 8 }).map((_, index) => (
@@ -64,7 +88,10 @@ export const StoreCatalogBrandsCarousel = ({
           ))}
         </div>
       ) : (
-        <div className="store-catalog-brands__viewport">
+        <div
+          ref={ViewportRef}
+          className="store-catalog-brands__viewport"
+        >
           <div className="store-catalog-brands__track">
             <ul className="store-catalog-brands__group">
               {RenderLogoSlides(StoreBrandLogoItems, catalogBrands, ActiveBrandId, CategoryId)}
