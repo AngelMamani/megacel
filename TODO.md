@@ -142,6 +142,7 @@
 - [x] Admin Configuración: eliminada sección "Gestión de Administradores" (vive en Usuarios) (2026-07-02)
 - [x] Registro login/tienda: quitado campo "Teléfono (opcional)" del formulario (2026-07-02)
 - [x] Preparación Vercel: `vercel.json`, `.env.local.example`, README despliegue, fix link registro (2026-07-02)
+- [x] GitHub: proyecto subido a `https://github.com/AngelMamani/megacel.git` (rama `main`) (2026-07-02)
 
 ## FIXME
 
